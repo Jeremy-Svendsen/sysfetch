@@ -16,7 +16,7 @@ while read -r line ; do
 	case $line in
 		*$device_id*) gpu=$line ;;
 	esac
-done < <(curl https://pci-ids.ucw.cz/read/PC/$vendor_id)
+done < <(curl https://pci-ids.ucw.cz/read/PC/$vendor_id 2>/dev/null)
 
 gpu=$(sed "$html_strip" <<< $gpu)
 gpu=${gpu:4}
