@@ -20,7 +20,7 @@ while read -r line ; do
 done <<< $pci_id
 gpu_vendor=$(sed "$html_strip" <<< $gpu_vendor)
 gpu_vendor=${gpu_vendor//Name: }
-gpu_vendor=${gpu_vendor//Note: nee}
+gpu_vendor=${gpu_vendor//Note:*}
 
 while read -r line ; do
 	case $line in
@@ -31,7 +31,7 @@ done <<< $pci_id
 gpu_name=$(sed "$html_strip" <<< $gpu_name)
 gpu_name=${gpu_name:4}
 
-gpu_strip="s/Advanced Micro Devices, Inc.//;s/ATI Technologies, Inc.//"
+gpu_strip="s/Advanced Micro Devices, Inc.//"
 gpu_vendor=$(sed "$gpu_strip" <<< $gpu_vendor)
 gpu="$gpu_vendor $gpu_name"
 gpu=$(tr -d '[]' <<< $gpu)
